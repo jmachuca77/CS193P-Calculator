@@ -101,5 +101,16 @@
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 
+- (IBAction)clearAllPressed
+{
+    self.display.text = @"0";
+    self.userIsInTheMiddleOfEnteringANumber = NO;
+    self.thisIsTheFirstDecimalPoint = NO;
+    
+    [self.brain clearStack];
+    
+    self.stackDisplay.text = @"";
+    
+}
 
 @end
