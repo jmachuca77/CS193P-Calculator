@@ -78,15 +78,8 @@
 
 - (IBAction)enterPressed
 {
-    if([self.display.text isEqualToString:@"π"])
-        {
-        [self.brain pushOperand:3.14159];
-        }
-    else
-        {
-        [self.brain pushOperand:[self.display.text doubleValue]];
-        }
-        self.userIsInTheMiddleOfEnteringANumber = NO;
+    [self.brain pushOperand:[self.display.text doubleValue]];
+    self.userIsInTheMiddleOfEnteringANumber = NO;
     self.thisIsTheFirstDecimalPoint = NO;
 }
 
