@@ -58,6 +58,12 @@
         {
             result = [self popOperand] / divisor;
         }
+        else
+        {
+            /* Send Alert View */
+ 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Divide by 0" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
+			[alertView show];    
+        }
     }
     else if ([operation isEqualToString:@"SIN"])
     {

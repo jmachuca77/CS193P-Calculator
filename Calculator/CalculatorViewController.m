@@ -75,7 +75,7 @@
 			[alertView show];
         }
     } else {
-        self.display.text = digit;
+        self.display.text = [NSString stringWithFormat:@"0%@", digit];
         self.userIsInTheMiddleOfEnteringANumber = YES;
         self.thisIsTheFirstDecimalPoint = YES;
     }
@@ -94,11 +94,29 @@
 {
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     NSString *operation = [sender currentTitle];
+    
     self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" "];
     self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:operation];
     self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" ="];
+    
     double result = [self.brain performOperation:operation];
     self.display.text = [NSString stringWithFormat:@"%g", result];
+}
+
+- (IBAction)changeSign
+{
+    if (self.userIsInTheMiddleOfEnteringANumber)
+    {
+        self.display.text = [NSString stringWithFormat:@"-%@", self.display.text];
+    }
+    else
+    {
+        [self.brain pushOperand:-1];
+        double result = [self.brain performOperation:@"*"];
+        self.display.text = [NSString stringWithFormat:@"%g", result];
+        
+        self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" +/-"];
+    }
 }
 
 - (IBAction)clearAllPressed
