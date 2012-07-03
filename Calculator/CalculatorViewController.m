@@ -19,7 +19,10 @@
 @implementation CalculatorViewController
 
 @synthesize display = _display;
+@synthesize stackDisplay = _stackDisplay;
+
 @synthesize brain = _brain;
+
 @synthesize userIsInTheMiddleOfEnteringANumber;
 @synthesize thisIsTheFirstDecimalPoint;
 
@@ -46,7 +49,8 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (IBAction)digitPressed:(UIButton *)sender {
+- (IBAction)digitPressed:(UIButton *)sender
+{
     NSString *digit = [sender currentTitle];
     if(self.userIsInTheMiddleOfEnteringANumber){
         self.display.text = [self.display.text stringByAppendingString:digit];        
@@ -57,8 +61,9 @@
 
     
 }
-- (IBAction)decimalPointPressed:(UIButton *)sender {
 
+- (IBAction)decimalPointPressed:(UIButton *)sender
+{
     NSString *digit = [sender currentTitle];
     if (userIsInTheMiddleOfEnteringANumber) {
         if (!thisIsTheFirstDecimalPoint) {
@@ -79,6 +84,8 @@
 - (IBAction)enterPressed
 {
     [self.brain pushOperand:[self.display.text doubleValue]];
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" "];
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:self.display.text];
     self.userIsInTheMiddleOfEnteringANumber = NO;
     self.thisIsTheFirstDecimalPoint = NO;
 }
@@ -87,6 +94,9 @@
 {
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     NSString *operation = [sender currentTitle];
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" "];
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:operation];
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" ="];
     double result = [self.brain performOperation:operation];
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
