@@ -59,6 +59,19 @@
             result = [self popOperand] / divisor;
         }
     }
+    else if ([operation isEqualToString:@"SIN"])
+    {
+        result = sin([self popOperand]);
+    }
+    else if ([operation isEqualToString:@"COS"])
+    {
+        result = cos([self popOperand]);
+    }
+    else if ([operation isEqualToString:@"SQRT"])
+    {
+        result = sqrt([self popOperand]);
+    }
+
     
     [self pushOperand:result];
     
