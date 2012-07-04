@@ -52,6 +52,9 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+/*  This Method is used for entering strings into the stack display
+    it check to see if there is an equal sign on the display and removes it 
+    before entering a new data. */
 -(void) enterDataIntoStackDisplay:(NSString *)dataForStackDisplay
 {
     if ([dataForStackDisplay isEqualToString:@"="])
@@ -68,6 +71,9 @@
     self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:dataForStackDisplay];
 }
 
+/*  This is the method called when an numbers is pressed on the calculator. It is used
+    to pass the number into the display, it checks for the special case when 0 is already
+    displayed */
 - (IBAction)digitPressed:(UIButton *)sender
 {
     NSString *digit = [sender currentTitle];
@@ -81,6 +87,11 @@
     
 }
 
+/*  This method is called when a decimal point is pressed, it checks to see that the 
+    resulting entered value is correct and that two decimal points are not entered
+    in case to decimal points are entered a warning is displayed to the user.
+    In case the decimal point is the first digit pressed then a 0 is entered first.
+ */
 - (IBAction)decimalPointPressed:(UIButton *)sender
 {
     NSString *digit = [sender currentTitle];
@@ -100,6 +111,8 @@
     }
 }
 
+/*  This is called when the enter key is pressed and is used to send the number
+    To the calculator brain to be put on the stack. */
 - (IBAction)enterPressed
 {
     [self.brain pushOperand:[self.display.text doubleValue]];
@@ -110,6 +123,8 @@
     self.thisIsTheFirstDecimalPoint = NO;
 }
 
+/*  This is called when any of the operations are pressed it is used to tell the calcualtor bran
+    to perform an operation with the numbers on the stack */
 - (IBAction)operationPressed:(UIButton *)sender
 {
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
@@ -123,6 +138,8 @@
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 
+/*  This is called when the change sign operation is requested. This operation must behave 
+    differently in the case the user is in the middle of entering a number */
 - (IBAction)changeSign
 {
     if (self.userIsInTheMiddleOfEnteringANumber)
@@ -139,6 +156,8 @@
     }
 }
 
+/*  This is called when clear is pressed it resets the whole calculator and erases the 
+    Stack */
 - (IBAction)clearAllPressed
 {
     self.display.text = @"0";
@@ -152,6 +171,8 @@
     
 }
 
+/*  This is called when the backspace key is pressed and is used to erase the last entered 
+    character. When the last character is errased then 0 is entered in the display. */
 - (IBAction)backspacePressed
 {
     self.display.text = [self.display.text substringToIndex:[self.display.text length]-1];
