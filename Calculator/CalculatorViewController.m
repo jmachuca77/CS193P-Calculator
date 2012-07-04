@@ -13,6 +13,8 @@
 @interface CalculatorViewController ()
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic) BOOL thisIsTheFirstDecimalPoint;
+@property (nonatomic) BOOL equalSignPresentOnStackDisplay;
+
 @property (nonatomic, strong) CalculatorBrain *brain;
 @end
 
@@ -25,6 +27,7 @@
 
 @synthesize userIsInTheMiddleOfEnteringANumber;
 @synthesize thisIsTheFirstDecimalPoint;
+@synthesize equalSignPresentOnStackDisplay;
 
 - (CalculatorBrain *) brain
 {
@@ -47,6 +50,22 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+-(void) enterDataIntoStackDisplay:(NSString *)dataForStackDisplay
+{
+    if ([dataForStackDisplay isEqualToString:@"="])
+    {
+        self.equalSignPresentOnStackDisplay = YES;
+    }
+    else if (self.equalSignPresentOnStackDisplay)
+    {
+        self.stackDisplay.text = [self.stackDisplay.text substringToIndex:[self.stackDisplay.text length]-1];
+        self.equalSignPresentOnStackDisplay = NO;
+    }
+    
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" "];
+    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:dataForStackDisplay];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender
@@ -84,8 +103,9 @@
 - (IBAction)enterPressed
 {
     [self.brain pushOperand:[self.display.text doubleValue]];
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" "];
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:self.display.text];
+    
+    [self enterDataIntoStackDisplay:self.display.text];
+    
     self.userIsInTheMiddleOfEnteringANumber = NO;
     self.thisIsTheFirstDecimalPoint = NO;
 }
@@ -95,9 +115,9 @@
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     NSString *operation = [sender currentTitle];
     
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" "];
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:operation];
-    self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" ="];
+    [self enterDataIntoStackDisplay:operation];
+    
+    [self enterDataIntoStackDisplay:@"="];
     
     double result = [self.brain performOperation:operation];
     self.display.text = [NSString stringWithFormat:@"%g", result];
@@ -115,7 +135,7 @@
         double result = [self.brain performOperation:@"*"];
         self.display.text = [NSString stringWithFormat:@"%g", result];
         
-        self.stackDisplay.text = [self.stackDisplay.text stringByAppendingString:@" +/-"];
+        [self enterDataIntoStackDisplay:@"+/-"];
     }
 }
 
@@ -124,6 +144,7 @@
     self.display.text = @"0";
     self.userIsInTheMiddleOfEnteringANumber = NO;
     self.thisIsTheFirstDecimalPoint = NO;
+    self.equalSignPresentOnStackDisplay = NO;
     
     [self.brain clearStack];
     

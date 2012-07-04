@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *stackDisplay;
 
+-(void) enterDataIntoStackDisplay:(NSString *)dataForStackDisplay;
+
 @end
