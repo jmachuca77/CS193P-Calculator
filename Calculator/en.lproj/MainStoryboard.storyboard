@@ -331,6 +331,22 @@
                                     <action selector="changeSign" destination="2" eventType="touchUpInside" id="vxw-MS-nMi"/>
                                 </connections>
                             </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="K7z-Y4-cI3">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Ld2-Ay-NrK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="40"/>
+                                <state key="normal" title="←">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backspacePressed" destination="2" eventType="touchUpInside" id="uMu-G6-hHS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
@@ -342,13 +358,15 @@
                             <constraint firstItem="UQ9-I0-1P0" firstAttribute="top" secondItem="mL4-uJ-rhI" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="4Pq-zj-JJm"/>
                             <constraint firstItem="RvU-No-qZV" firstAttribute="leading" secondItem="Wjt-bm-be9" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="4ax-Wd-XD5"/>
                             <constraint firstAttribute="trailing" secondItem="rAL-vE-aVB" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="7kD-jY-yIV"/>
+                            <constraint firstItem="K7z-Y4-cI3" firstAttribute="leading" secondItem="frg-Lg-1uK" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="9Br-tV-kqh"/>
                             <constraint firstItem="frg-Lg-1uK" firstAttribute="leading" secondItem="Zdh-OH-Tyg" secondAttribute="leading" type="default" id="9aZ-lw-Loz"/>
                             <constraint firstItem="HlV-7g-n4t" firstAttribute="top" secondItem="3" secondAttribute="top" constant="14" id="B5O-p6-2Km"/>
                             <constraint firstItem="Wjt-bm-be9" firstAttribute="leading" secondItem="7O7-sq-N2P" secondAttribute="leading" type="default" id="CTd-X3-Aio"/>
                             <constraint firstItem="mL4-uJ-rhI" firstAttribute="top" secondItem="LGb-oJ-Heu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CaF-S9-cFc"/>
-                            <constraint firstItem="frg-Lg-1uK" firstAttribute="top" secondItem="Zdh-OH-Tyg" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DPl-sv-HuR"/>
                             <constraint firstItem="1XJ-5w-g23" firstAttribute="leading" secondItem="lQ1-Mx-0wV" secondAttribute="leading" type="default" id="DfX-4O-Aq9"/>
+                            <constraint firstItem="K7z-Y4-cI3" firstAttribute="top" secondItem="N3j-qd-fcV" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DiL-jZ-iS7"/>
                             <constraint firstItem="frg-Lg-1uK" firstAttribute="trailing" secondItem="Zdh-OH-Tyg" secondAttribute="trailing" type="default" id="EA9-ve-yK6"/>
+                            <constraint firstAttribute="trailing" secondItem="K7z-Y4-cI3" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Gio-vA-BVl"/>
                             <constraint firstItem="RvU-No-qZV" firstAttribute="leading" secondItem="YsD-cf-FCD" secondAttribute="leading" type="default" id="GyK-n3-DIG"/>
                             <constraint firstItem="Wnz-f1-WuS" firstAttribute="baseline" secondItem="jkF-Bt-ICR" secondAttribute="baseline" type="default" id="HAb-Ob-7Dh"/>
                             <constraint firstItem="mL4-uJ-rhI" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Hk8-gS-qPp"/>
@@ -379,6 +397,7 @@
                             <constraint firstItem="6ew-AT-7Hj" firstAttribute="baseline" secondItem="Wjt-bm-be9" secondAttribute="baseline" type="default" id="gBI-9W-3sO"/>
                             <constraint firstItem="Wnz-f1-WuS" firstAttribute="baseline" secondItem="rwP-NB-VLY" secondAttribute="baseline" type="default" id="gkI-Mc-hIQ"/>
                             <constraint firstItem="Zdh-OH-Tyg" firstAttribute="baseline" secondItem="mL4-uJ-rhI" secondAttribute="baseline" type="default" id="h2X-9H-qKH"/>
+                            <constraint firstItem="UQ9-I0-1P0" firstAttribute="baseline" secondItem="frg-Lg-1uK" secondAttribute="baseline" type="default" id="i03-gV-PXv"/>
                             <constraint firstItem="ojZ-B6-gpJ" firstAttribute="leading" secondItem="YsD-cf-FCD" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="j5d-DX-WpW"/>
                             <constraint firstAttribute="trailing" secondItem="ojZ-B6-gpJ" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="jz9-I7-z1e"/>
                             <constraint firstItem="Zdh-OH-Tyg" firstAttribute="leading" secondItem="gx7-By-dkn" secondAttribute="leading" type="default" id="kbB-nv-mCT"/>
@@ -411,6 +430,21 @@
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="CalculatorViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="decimalPointPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="digitPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="operationPressed:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="stackDisplay" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

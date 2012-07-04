@@ -131,4 +131,15 @@
     
 }
 
+- (IBAction)backspacePressed
+{
+    self.display.text = [self.display.text substringToIndex:[self.display.text length]-1];
+    
+    if(![self.display.text length])
+    {
+        self.display.text = @"0";
+        self.userIsInTheMiddleOfEnteringANumber = NO;
+    }
+}
+
 @end
